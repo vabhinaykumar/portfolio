@@ -13,6 +13,7 @@ permissions:
   id-token: write
 
 jobs:
+  # 1. VALIDATION JOB (Runs on PRs and Pushes)
   validate:
     runs-on: ubuntu-latest
     steps:
@@ -31,9 +32,11 @@ jobs:
           
           echo "✅ Validation passed!"
 
+  # 2. DEPLOYMENT JOB (Only runs on Push to Main or Manual Trigger)
   build-and-deploy:
     needs: validate
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    # CHANGED: Explicitly exclude pull requests to prevent "Skipped" status from appearing
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
