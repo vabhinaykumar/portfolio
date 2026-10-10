@@ -15,50 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        .brand-logo {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        #bg-canvas, #skills-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-        }
-
-        #bg-canvas { z-index: 0; }
-        #skills-canvas { z-index: 1; display: none; }
-
-        @keyframes float-slow {
-            0%, 100% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(30px, -40px) scale(1.1); }
-        }
-        @keyframes float-reverse {
-            0%, 100% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(-30px, 30px) scale(1.05); }
-        }
-        .animate-blob-1 { animation: float-slow 12s infinite ease-in-out; }
-        .animate-blob-2 { animation: float-reverse 15s infinite ease-in-out; }
-
-        .page-view {
-            display: none;
-            min-height: 100vh;
-            padding-top: 8rem;
-            padding-bottom: 6rem;
-        }
-        .page-view.active {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    </style>
+    <!-- Link External CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-black relative overflow-x-hidden min-h-screen">
 
@@ -314,68 +272,223 @@
 
     <!-- PAGE 4: PROJECTS -->
     <div id="page-projects" class="page-view relative z-10">
-        <div class="max-w-5xl mx-auto px-6 w-full space-y-12">
+        <div class="max-w-5xl mx-auto px-6 w-full space-y-8">
             <div class="space-y-2 relative">
                 <div class="inline-block text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest bg-cyan-950/60 px-3 py-1 rounded border border-cyan-800/40">Portfolio</div>
                 <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">DevOps & Cloud <span class="bg-gradient-to-r from-cyan-400 to-teal-300 bg-clip-text text-transparent">Projects</span></h2>
+                <p class="text-xs font-mono text-slate-400">Click on any card to expand and view detailed architecture & technical specifications.</p>
                 <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full mt-2"></div>
             </div>
 
-            <div class="space-y-10">
-                <!-- Project 1: aws-3tier-infrastructure -->
-                <div class="border-b border-slate-800/80 pb-8 space-y-3">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-3">
-                            <i class="fa-solid fa-network-wired text-cyan-400"></i> AWS 3-Tier Architecture Infrastructure
-                        </h3>
-                        <span class="text-xs font-mono text-cyan-400 bg-cyan-950/40 px-2.5 py-1 rounded border border-cyan-800/40 w-fit">aws-3tier-infrastructure</span>
+            <div class="grid grid-cols-1 gap-6 pt-2">
+                <!-- CARD 1: aws-3tier-infrastructure -->
+                <div onclick="toggleProject(this)" class="project-card bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 transition-all duration-300 shadow-lg cursor-pointer group hover:bg-slate-900/90">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-network-wired text-cyan-400 text-xl group-hover:scale-110 transition-transform"></i>
+                                <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">AWS 3–Tier Architecture Infrastructure</h3>
+                            </div>
+                            <span class="inline-block text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-0.5 rounded border border-cyan-800/40 mt-1">aws-3tier-infrastructure</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 group-hover:text-cyan-400 text-lg mt-1"></i>
                     </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Designed and implemented a production-ready 3-tier cloud architecture on AWS featuring a custom VPC, public subnets for Application Load Balancers, private subnets for backend compute instances, and isolated private subnets for Amazon RDS databases to ensure optimal security and high availability.
+
+                    <p class="text-slate-300 text-sm leading-relaxed mt-4">
+                        Designed and implemented a production-ready 3–tier cloud architecture on AWS featuring a custom VPC, public subnets for Application Load Balancers, private subnets for backend compute instances, and isolated private subnets for Amazon RDS databases to ensure optimal security and high availability.
                     </p>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">AWS VPC</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">EC2 / ALB</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">Amazon RDS</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">Security Groups</span>
+
+                    <div class="expanded-details pt-4 border-t border-slate-800/80 mt-4 space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-list-check"></i> Key Architectural Highlights & Implementation
+                            </h4>
+                            <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Custom VPC Networking:</strong> Multi-AZ VPC design with Internet Gateways, NAT Gateways for secure egress traffic, and custom route tables.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Public Web Tier:</strong> Internet-facing Application Load Balancer (ALB) routing HTTP/HTTPS traffic to backend targets across availability zones.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Private App Tier:</strong> Amazon EC2 instances hosted inside private subnets managed via Auto Scaling Groups for high fault tolerance.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Isolated Database Tier:</strong> Amazon RDS Multi-AZ PostgreSQL/MySQL database layer restricted strictly to application tier security groups.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Security & Access Control:</strong> Strict Security Group chaining and Network ACLs restricting direct public access to internal services.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-screwdriver-wrench"></i> Technologies & Tools
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-amazonwebservices-plain colored mr-1"></i> AWS VPC</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-server text-amber-400 mr-1"></i> EC2</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-diagram-project text-cyan-400 mr-1"></i> ALB</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-database text-blue-400 mr-1"></i> Amazon RDS</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> Security Groups</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-network-wired text-purple-400 mr-1"></i> NAT Gateway</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-git-plain colored mr-1"></i> Git / GitHub</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="https://github.com/vabhinaykumar/aws-3tier-infrastructure" target="_blank" onclick="event.stopPropagation();" class="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                                View Repository on GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-4">
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">AWS VPC</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">EC2 / ALB</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">Amazon RDS</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">Security Groups</span>
                     </div>
                 </div>
 
-                <!-- Project 2: aws-container-deployment -->
-                <div class="border-b border-slate-800/80 pb-8 space-y-3">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-3">
-                            <i class="fa-solid fa-box-archive text-cyan-400"></i> AWS Container Deployment & Orchestration
-                        </h3>
-                        <span class="text-xs font-mono text-cyan-400 bg-cyan-950/40 px-2.5 py-1 rounded border border-cyan-800/40 w-fit">aws-container-deployment</span>
+                <!-- CARD 2: aws-container-deployment -->
+                <div onclick="toggleProject(this)" class="project-card bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 transition-all duration-300 shadow-lg cursor-pointer group hover:bg-slate-900/90">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-box-archive text-cyan-400 text-xl group-hover:scale-110 transition-transform"></i>
+                                <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">AWS Container Deployment & Orchestration</h3>
+                            </div>
+                            <span class="inline-block text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-0.5 rounded border border-cyan-800/40 mt-1">aws-container-deployment</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 group-hover:text-cyan-400 text-lg mt-1"></i>
                     </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+
+                    <p class="text-slate-300 text-sm leading-relaxed mt-4">
                         Engineered a robust container deployment workflow leveraging Docker for containerization and Amazon Elastic Container Registry (ECR) for image management, streamlining microservices distribution and reliable execution on cloud environments.
                     </p>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">Docker</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">AWS ECR</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">CI/CD</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">Cloud Infrastructure</span>
+
+                    <div class="expanded-details pt-4 border-t border-slate-800/80 mt-4 space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-list-check"></i> Key Architectural Highlights & Implementation
+                            </h4>
+                            <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Microservices Containerization:</strong> Crafted lightweight, multi-stage Dockerfiles optimizing container build times and reducing runtime image footprint.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Amazon ECR Integration:</strong> Established automated image tagging, versioning, and secure push/pull authentication routines with AWS ECR repositories.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Automated Deployment Workflows:</strong> Configured continuous integration automation to validate, build, scan, and deploy containers seamlessly onto cloud instances.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Runtime Parity & Testing:</strong> Leveraged Docker Compose for local orchestration, ensuring environment consistency between development and production.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-screwdriver-wrench"></i> Technologies & Tools
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-docker-plain colored mr-1"></i> Docker</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-amazonwebservices-plain colored mr-1"></i> AWS ECR</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-githubactions-plain colored mr-1"></i> GitHub Actions</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-linux-plain colored mr-1"></i> Bash Scripts</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-gears text-indigo-400 mr-1"></i> Container Orchestration</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="https://github.com/vabhinaykumar/aws-container-deployment" target="_blank" onclick="event.stopPropagation();" class="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                                View Repository on GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-4">
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">Docker</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">AWS ECR</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">CI/CD</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">Cloud Infrastructure</span>
                     </div>
                 </div>
 
-                <!-- Project 3: TenantPay -->
-                <div class="pb-2 space-y-3">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-3">
-                            <i class="fa-solid fa-building-user text-cyan-400"></i> TenantPay - Multi-Tenant Rental Payment Platform
-                        </h3>
-                        <span class="text-xs font-mono text-cyan-400 bg-cyan-950/40 px-2.5 py-1 rounded border border-cyan-800/40 w-fit">Backend Platform</span>
+                <!-- CARD 3: TenantPay -->
+                <div onclick="toggleProject(this)" class="project-card bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 transition-all duration-300 shadow-lg cursor-pointer group hover:bg-slate-900/90">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-building-user text-cyan-400 text-xl group-hover:scale-110 transition-transform"></i>
+                                <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">TenantPay - Multi–Tenant Rental Payment Platform</h3>
+                            </div>
+                            <span class="inline-block text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-0.5 rounded border border-cyan-800/40 mt-1">Backend Platform</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 group-hover:text-cyan-400 text-lg mt-1"></i>
                     </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+
+                    <p class="text-slate-300 text-sm leading-relaxed mt-4">
                         Developed production backend microservices using NestJS, TypeScript, and TypeORM. Integrated Nuvei payment gateways, Plaid bank verifications, Descope authentication, and Redis caching for high-speed session management. Built role-based access control (RBAC), OAuth 2.0, and JWT multi-tenant isolation mechanisms.
                     </p>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">NestJS</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">PostgreSQL</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">Redis</span>
-                        <span class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded font-medium">TypeORM</span>
+
+                    <div class="expanded-details pt-4 border-t border-slate-800/80 mt-4 space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-list-check"></i> Key Architectural Highlights & Implementation
+                            </h4>
+                            <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Multi-Tenant Architecture:</strong> Designed isolated schema and JWT database context scoping to keep tenant payment records separate and secure.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Payment Integration:</strong> Integrated Nuvei card processing and Plaid Instant ACH bank verification workflows for seamless payment transactions.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Caching & Performance:</strong> Configured Redis in-memory storage for high-speed session handling, user RBAC permission checks, and API rate limiting.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-cyan-400 mt-0.5"></i>
+                                    <span><strong>Authentication & Security:</strong> Built OAuth 2.0, Descope multi-factor authentication, and TypeORM PostgreSQL data access layer adhering to SOLID principles.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-screwdriver-wrench"></i> Technologies & Tools
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-nestjs-plain colored mr-1"></i> NestJS</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-typescript-plain colored mr-1"></i> TypeScript</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-postgresql-plain colored mr-1"></i> PostgreSQL</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="devicon-redis-plain colored mr-1"></i> Redis</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-shield-halved text-cyan-400 mr-1"></i> TypeORM</span>
+                                <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-200 rounded-md font-medium"><i class="fa-solid fa-credit-card text-emerald-400 mr-1"></i> Nuvei & Plaid</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-4">
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">NestJS</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">PostgreSQL</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">Redis</span>
+                        <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 text-slate-300 rounded-lg font-medium">TypeORM</span>
                     </div>
                 </div>
             </div>
@@ -468,7 +581,7 @@
 
             <div class="flex justify-center gap-6 pt-4 text-2xl text-slate-400">
                 <span class="hover:text-cyan-400 transition-colors cursor-default" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></span>
-                <a href="https://github.com" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="https://github.com/vabhinaykumar" target="_blank" class="hover:text-cyan-400 transition-colors" title="GitHub"><i class="fa-brands fa-github"></i></a>
             </div>
         </div>
     </div>
@@ -478,237 +591,7 @@
         <p>&copy; 2026 ABHINAY KUMAR. All rights reserved.</p>
     </footer>
 
-    <!-- Interactive Scripts -->
-    <script>
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(page => {
-                page.classList.remove('active');
-            });
-            const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-
-            // Toggle floating skill logos canvas only for Skills page
-            const skillsCanvas = document.getElementById('skills-canvas');
-            if (pageId === 'skills') {
-                skillsCanvas.style.display = 'block';
-            } else {
-                skillsCanvas.style.display = 'none';
-            }
-
-            window.scrollTo(0, 0);
-        }
-
-        function closeMobileMenu() {
-            document.getElementById('mobile-menu').classList.add('hidden');
-        }
-
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Background Particle Canvas (Standard Network background)
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let particlesArray = [];
-        const numberOfParticles = 65;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-        init();
-
-        function connect() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let dx = particlesArray[a].x - particlesArray[b].x;
-                    let dy = particlesArray[a].y - particlesArray[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 130) {
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.12 - distance / 1300})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connect();
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Canvas for Floating Skill Logos with Strict Window Containment
-        const sCanvas = document.getElementById('skills-canvas');
-        const sCtx = sCanvas.getContext('2d');
-
-        function resizeSkillsCanvas() {
-            sCanvas.width = window.innerWidth;
-            sCanvas.height = window.innerHeight;
-        }
-        resizeSkillsCanvas();
-        window.addEventListener('resize', resizeSkillsCanvas);
-
-        // Unique List of Logos (Each logo appears exactly once)
-        const logoUrls = [
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg',
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg'
-        ];
-
-        const loadedImages = [];
-        logoUrls.forEach(url => {
-            const img = new Image();
-            img.src = url;
-            loadedImages.push(img);
-        });
-
-        class FloatingSVGLogo {
-            constructor(img) {
-                this.img = img;
-                this.size = 42;
-                // Initialize safely well within boundaries
-                this.x = Math.random() * (sCanvas.width - 100) + 50;
-                this.y = Math.random() * (sCanvas.height - 100) + 50;
-                this.speedX = (Math.random() - 0.5) * 0.35;
-                this.speedY = (Math.random() - 0.5) * 0.35;
-                this.opacity = 0.22;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Strict boundary collision detection: clamp position & reverse velocity immediately
-                const padding = 10;
-                if (this.x <= padding) {
-                    this.x = padding;
-                    this.speedX *= -1;
-                } else if (this.x >= sCanvas.width - this.size - padding) {
-                    this.x = sCanvas.width - this.size - padding;
-                    this.speedX *= -1;
-                }
-
-                if (this.y <= padding + 80) { // account for header offset
-                    this.y = padding + 80;
-                    this.speedY *= -1;
-                } else if (this.y >= sCanvas.height - this.size - padding - 40) { // account for footer offset
-                    this.y = sCanvas.height - this.size - padding - 40;
-                    this.speedY *= -1;
-                }
-            }
-            draw() {
-                if (this.img.complete && this.img.naturalWidth !== 0) {
-                    sCtx.globalAlpha = this.opacity;
-                    sCtx.drawImage(this.img, this.x, this.y, this.size, this.size);
-                    sCtx.globalAlpha = 1.0;
-                }
-            }
-        }
-
-        let floatingSVGArray = [];
-        function initFloatingSVGLogos() {
-            floatingSVGArray = [];
-            loadedImages.forEach(img => {
-                floatingSVGArray.push(new FloatingSVGLogo(img));
-            });
-        }
-        initFloatingSVGLogos();
-
-        function handleCollisions() {
-            for (let i = 0; i < floatingSVGArray.length; i++) {
-                for (let j = i + 1; j < floatingSVGArray.length; j++) {
-                    let logoA = floatingSVGArray[i];
-                    let logoB = floatingSVGArray[j];
-
-                    let dx = logoB.x - logoA.x;
-                    let dy = logoB.y - logoA.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    let minDistance = logoA.size + 15;
-
-                    if (distance < minDistance) {
-                        let tempX = logoA.speedX;
-                        let tempY = logoA.speedY;
-                        logoA.speedX = logoB.speedX;
-                        logoA.speedY = logoB.speedY;
-                        logoB.speedX = tempX;
-                        logoB.speedY = tempY;
-
-                        let overlap = minDistance - distance;
-                        let angle = Math.atan2(dy, dx);
-                        logoA.x -= Math.cos(angle) * overlap * 0.5;
-                        logoA.y -= Math.sin(angle) * overlap * 0.5;
-                        logoB.x += Math.cos(angle) * overlap * 0.5;
-                        logoB.y += Math.sin(angle) * overlap * 0.5;
-                    }
-                }
-            }
-        }
-
-        function animateFloatingSVGLogos() {
-            sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
-            handleCollisions();
-            for (let i = 0; i < floatingSVGArray.length; i++) {
-                floatingSVGArray[i].update();
-                floatingSVGArray[i].draw();
-            }
-            requestAnimationFrame(animateFloatingSVGLogos);
-        }
-        animateFloatingSVGLogos();
-    </script>
+    <!-- Link External JS -->
+    <script src="js/script.js"></script>
 </body>
 </html>

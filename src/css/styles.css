@@ -1,0 +1,60 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.brand-logo {
+    font-family: 'Orbitron', sans-serif;
+}
+
+#bg-canvas, #skills-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+#bg-canvas { z-index: 0; }
+#skills-canvas { z-index: 1; display: none; }
+
+@keyframes float-slow {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(30px, -40px) scale(1.1); }
+}
+@keyframes float-reverse {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(-30px, 30px) scale(1.05); }
+}
+.animate-blob-1 { animation: float-slow 12s infinite ease-in-out; }
+.animate-blob-2 { animation: float-reverse 15s infinite ease-in-out; }
+
+.page-view {
+    display: none;
+    min-height: 100vh;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+}
+.page-view.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Smooth expandable transition for project cards */
+.expanded-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+.project-card.active .expanded-details {
+    max-height: 1000px;
+    opacity: 1;
+}
+.chevron-icon {
+    transition: transform 0.3s ease;
+}
+.project-card.active .chevron-icon {
+    transform: rotate(180deg);
+}
