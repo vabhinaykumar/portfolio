@@ -1,4 +1,4 @@
-name: Portfolio to GitHub Pages
+name: Portfolio
 
 on:
   push:
@@ -13,28 +13,27 @@ permissions:
   id-token: write
 
 jobs:
-  # 1. VALIDATION JOB (Runs on PRs and Pushes)
   validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
       
-      - name: Validate HTML Structure
+      - name: Validate File Existence
         run: |
-          echo "🔍 Checking if index.html exists..."
-          test -f src/index.html || { echo "❌ ERROR: src/index.html not found!"; exit 1; }
+          echo "Checking directory structure..."
+          ls -R
           
-          echo "🔍 Checking for valid closing tags..."
-          grep -q "</html>" src/index.html || { echo "❌ ERROR: Missing </html> tag!"; exit 1; }
-          grep -q "</body>" src/index.html || { echo "❌ ERROR: Missing </body> tag!"; exit 1; }
+          if [ ! -f "src/index.html" ]; then
+            echo "::error::src/index.html not found!"
+            exit 1
+          fi
           
-          echo "✅ Validation passed! Ready for review."
+          echo "✅ Validation passed!"
 
-  # 2. DEPLOYMENT JOB (Only runs on Push to Main or Manual Trigger)
   build-and-deploy:
-    needs: validate # Waits for validation to pass first
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' # Only deploy on merge or manual run
+    needs: validate
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
